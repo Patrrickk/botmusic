@@ -1,11 +1,12 @@
 
-from pytube import YouTube
+from pytube import YouTube, Playlist
 import os
 
 # url do YouTube
 yt = YouTube('https://youtu.be/7xwjLCCVZRk?list=RDuVB9CAn5Np0')
-
+playlist = Playlist('https://www.youtube.com/playlist?list=PLAsTje28QYlwsrrLhzuDuJGr9rrDqw8cK')
 # extraindo só o audio
+for url in playlist:
 video = yt.streams.filter(only_audio=True).first()
 
 # verifique o destino para salvar o arquivo

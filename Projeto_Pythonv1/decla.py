@@ -1,12 +1,4 @@
-def contador(ist):
-   print(ist)
+p = {'pk': 1, 'ana': 2}
 
-
-valores = {}
-dados = []
-for c in range(0, 2):
-   valores['nome'] = str(input('NOme: '))
-   dados.append(valores.copy())
-   valores.clear()
-   contador(dados)
-print(dados[0]['nome'])
+for k in p.keys():
+    print(k)
