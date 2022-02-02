@@ -4,6 +4,7 @@ from time import sleep
 from pytube import YouTube, Playlist
 import os
 import emoji
+import csv
 import random
 
 intents = discord.Intents.default()
@@ -137,7 +138,8 @@ async def on_message(message):
                     con += 1
                     print(f'https = {https}')
                     print(f'Quem pode baixar agora é DADOS = {dados[author]} é podebaixar = {podebaixar}')
-                    if dados[author] == podebaixar:
+                    if author in dados:
+                        print('SIIIIIIIIIIIIIIIIIIM')
                         sleep(1)
                         await channel.send('Estou enviando, um momento')
                         if len(url) < 1:
