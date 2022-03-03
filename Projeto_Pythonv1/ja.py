@@ -1,28 +1,27 @@
-# from pytube import Playlist, YouTube
+# """
+# "r" -> usado somente para ler algo
+# "w" -> usado somente para escrever algo
+# "r+" -> usado para ler e escrever algo
+# "a" -> usado acrescentar algo
+# """
 #
-# playlist = Playlist('https://www.youtube.com/playlist?list=PLAsTje28QYlxlWvTcbOCua5bwUGu84obI')
+# valores = [12, 33, 55, 66]
 #
-# for url in playlist:
-#     video = YouTube(url)
-#     audio = video.streams.filter(only_audio=True)[0]
-#     destination = 'playlist//'
-#     audio.download(output_path=destination)
-#     print(destination)
-# print('feito')
-user1 = {}
-# while True:
-#     list_musicas.append(str(input('nome: ')))
-#     temp.append(list_musicas[:][0])
-#     list_musicas.clear()
-#     user['pk'] = temp
-#     print(user)
-# print('finalizado')
-notas = []
-nome_musica = list()
-for c in range(0, 2):
-    video = input('')
-    author = 'pk'
-    nome_musica.append(video)
-    user1[author] = nome_musica[:]
-    nome_musica.clear()
-print(user1)
+# with open('valores.txt', 'w') as arquivo:
+#     for valor in valores:
+#         arquivo.write(str(valor) + "\n")
+from pytube import Playlist, YouTube
+
+p = Playlist(str(input("URL: ")))
+print(f'Encontrei {len(p)} deseja baixar todas? por favor digite um valor: ')
+quant = int(input("valor: "))
+for pos, vid in enumerate(p.videos):
+    if quant > pos:
+        print(f'Downloading: {vid.title}')
+        audio = vid.streams.filter(only_audio=True).first()
+        audio.download()
+print("fim")
+
+# if quant ==
+#     audio = vid.streams.filter(only_audio=True)[0]
+# audio.download()

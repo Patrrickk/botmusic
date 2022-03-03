@@ -12,10 +12,10 @@ intents.members = True
 
 client = discord.Client(intents=intents)
 
-# quardar todos os dados dos úsuarios
+# guardar todos dados dos úsuarios
 dados = list()
 
-# salva temporariamente os dados de um úsuario
+# salva temporariamente os dados de um usuário
 pessoas = dict()
 
 # salva temporariamente os nomes das músicas de um úsuario
@@ -25,7 +25,7 @@ nome_music = list()
 list_musicas = list()
 list_temp = list_musicas[:]
 arquivos_baixados = []
-# dicionarios
+# dicionários
 usuarios = {}
 links = {}
 https = {}
@@ -35,7 +35,7 @@ quant_pessoas = 0
 # paginas
 pag = ''
 
-# variaveis para mostra uma determinada quantidade músicas por vez
+# variáveis para mostra uma determinada quantidade músicas por vez
 ini = 1
 fim = 3
 # Quem pode utilizar o bot
@@ -52,7 +52,7 @@ async def on_ready():
 async def on_message(message):
     # listas
     global dados, nome_music, gg
-    # dicionarios
+    # dicionários
     global usuarios, pessoas
     global quant_pessoas
     # variaveis simples
@@ -133,11 +133,12 @@ async def on_message(message):
                         if quant_pessoas == 0:
                             dados.append(pessoas.copy())
                             while True:
-                                with open('dados\server.csv', 'w', newline='') as arquivo:
+                                with open('dados\server.csv', 'a', newline='') as arquivo:
                                     add = csv.writer(arquivo)
                                     add.writerow(['User', 'Links', 'Músicas'])
                                     add.writerow(dados)
-                                with open('C:/Users/Patrick/Desktop/server.csv', 'r') as arquivo:
+                                with open('C:/Users/andre/Documents/GitHub/botmusic/Projeto_Pythonv1/dados/server.csv',
+                                          'r') as arquivo:
                                     leitor = arquivo.read()
                                     print(leitor)
                                 break
@@ -151,9 +152,9 @@ async def on_message(message):
                         quant_pessoas = 0
                         print(f'Dados = {dados}')
 
-                    print(novo_destino[60:])
+                    print(novo_destino[58:], "CALCINHA PRETA")
                     # envia o arquivo para o Discord
-                    await message.channel.send(file=discord.File(novo_destino[60:]))
+                    await message.channel.send(file=discord.File(novo_destino[58:]))
                     await message.channel.send("Protinho! :heart:")
             else:
                 print(message.author)
@@ -161,11 +162,16 @@ async def on_message(message):
             for dd in play:
                 if dd in message.content:
                     playlist = Playlist(message.content)
-                    for url in playlist:
+                    await message.channel.send(f"Encontrei {len(playlist)} músicas!\nQuantas desejá baixar?")
+                    con = str(message.content)
+                    while con.isnumeric() is not True:
+                        await message.channel.send('Prf didite um número!')
+                    for pos, url in enumerate(playlist):
                         print('url = ', len(url))
                         video = YouTube(url)
                         audio = video.streams.filter(only_audio=True)[0]
                         destination = 'playlist//'
+
                         local = audio.download(output_path=destination)
                         diretorio, extensao = os.path.splitext(local)
                         novo_destino = diretorio + '.mp3'
@@ -182,9 +188,9 @@ async def on_message(message):
                             # adiciona na lista as músicas baixadas
                             arquivos_baixados.append(novo_destino)
                             os.renames(local, novo_destino)
-                        print(novo_destino[60:])
+                        print(novo_destino[58:])
                         # envia o arquivo para o Discord
-                        await message.channel.send(file=discord.File(novo_destino[60:]))
+                        await message.channel.send(file=discord.File(novo_destino[58:]))
 
                     await message.channel.send("Protinho! :heart:")
         else:
