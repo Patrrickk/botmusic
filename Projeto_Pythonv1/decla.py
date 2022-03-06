@@ -121,6 +121,7 @@ async def on_message(message):
                         arquivos_baixados.append(novo_destino)
                         # troca o formato pra .mp3
                         os.renames(local, novo_destino)
+                        print("local >>>> ", novo_destino)
                         nome_music.append(audio.title)
                         print(f'DADODADOASD = {dados}')
                         for c in dados:
@@ -137,7 +138,7 @@ async def on_message(message):
                                     add = csv.writer(arquivo)
                                     add.writerow(['User', 'Links', 'Músicas'])
                                     add.writerow(dados)
-                                with open('C:/Users/andre/Documents/GitHub/botmusic/Projeto_Pythonv1/dados/server.csv',
+                                with open('dados/server.csv',
                                           'r') as arquivo:
                                     leitor = arquivo.read()
                                     print(leitor)
@@ -151,10 +152,10 @@ async def on_message(message):
                         pessoas.clear()
                         quant_pessoas = 0
                         print(f'Dados = {dados}')
-
-                    print(novo_destino[58:], "CALCINHA PRETA")
+                    # remove
+                    ne = novo_destino.find('mp3')
                     # envia o arquivo para o Discord
-                    await message.channel.send(file=discord.File(novo_destino[58:]))
+                    await message.channel.send(file=discord.File(novo_destino[ne:]))
                     await message.channel.send("Protinho! :heart:")
             else:
                 print(message.author)
